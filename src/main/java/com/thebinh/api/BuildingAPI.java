@@ -31,8 +31,8 @@ public class BuildingAPI {
 	@Autowired
     private BuildingService buildingService;
 	@GetMapping(value="/api/building/")
-	public ArrayList<BuildingDTO> getBuilding(@RequestParam(value = "name") String Name){
-		ArrayList<BuildingDTO> result = buildingService.findAll(Name);
+	public ArrayList<BuildingDTO> getBuilding(@RequestParam(value = "name") String name){
+		ArrayList<BuildingDTO> result = buildingService.findAll(name);
 		return result;
 	}
 }
