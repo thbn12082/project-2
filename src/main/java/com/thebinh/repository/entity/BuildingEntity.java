@@ -33,3 +33,4 @@ public class BuildingEntity {
 	}
 	
 }
+// làm map 1:1 với db tên làm giống
