@@ -1,13 +1,16 @@
 package com.thebinh.service.impl;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.thebinh.model.BuildingDTO;
-import com.thebinh.repository.BuildingRepository;
+import com.thebinh.repository.BuildingRespository;
+import com.thebinh.repository.DistrictRespontory;
 import com.thebinh.repository.entity.BuildingEntity;
+import com.thebinh.repository.entity.DistrictEntity;
 import com.thebinh.service.BuildingService;
 
 @Service
@@ -16,16 +19,22 @@ import com.thebinh.service.BuildingService;
 
 public class BuildingServiceImpl implements BuildingService{
 	@Autowired
-    private BuildingRepository buildingRepository;
+    private BuildingRespository buildingRepository;
+	
+	@Autowired
+    private DistrictRespontory districtRepository;
+	
+	
 	@Override
-	public ArrayList<BuildingDTO> findAll(String name, Long districtId) {
-		ArrayList<BuildingEntity> buildingEntities = buildingRepository.findAll(name, districtId); 
+	public ArrayList<BuildingDTO> findAll(Map<String, Object> params) {
+		ArrayList<BuildingEntity> buildingEntities = buildingRepository.findAll(params); 
 		ArrayList<BuildingDTO> result = new ArrayList<BuildingDTO>();
 		for(BuildingEntity item : buildingEntities) {
 			BuildingDTO building = new BuildingDTO();
 			building.setName(item.getName());
-			building.setAddress(item.getStreet() +" " + item.getWard());
-			building.setNumberOfBasement(item.getNumberOfBasement());
+			DistrictEntity districtEntity = districtRepository.findNameById(item.getDistrictid());
+			building.setAddress(item.getStreet() +" " + item.getWard() +" " + districtEntity.getName());
+			building.setNumberOfBasement(item.getNumberofbasement());
 			result.add(building);
 		}
 		return result;
