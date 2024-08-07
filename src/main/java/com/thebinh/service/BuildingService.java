@@ -7,5 +7,5 @@ import java.util.Map;
 import com.thebinh.model.BuildingDTO;
 
 public interface BuildingService{
-	ArrayList<BuildingDTO> findAll(Map<String, Object> params);
+	ArrayList<BuildingDTO> findAll(Map<String, Object> params, ArrayList<String> typecode);
 }
