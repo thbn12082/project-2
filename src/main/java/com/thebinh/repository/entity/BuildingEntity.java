@@ -5,7 +5,7 @@ import java.sql.Date;
 // phải là java bean
 
 public class BuildingEntity {
-	private int id; // id
+	private long id; // id
 	private String name; // tên
 	private String street; // đường
 	private String ward; // phường
@@ -27,7 +27,7 @@ public class BuildingEntity {
 	private String payment; // thanh toán
 	private String renttime; // thời gian thuê
 	private String decorationtime; // thời gian decor
-	private Double brokeragefee; // phí môi giới
+	private Long brokeragefee; // phí môi giới
 	private String note; // chú thích
 	private String linkofbuilding; // liên kết tòa nhà
 	private String map; // bản đồ
@@ -39,11 +39,11 @@ public class BuildingEntity {
 	private String managername; // tên quản lý
 	private String managerphonenumber; // số điện thoại quản lý
 	
-	public int getId() {
+	public long getId() {
 		return id;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setId(long l) {
+		this.id = l;
 	}
 	public String getName() {
 		return name;
@@ -171,11 +171,11 @@ public class BuildingEntity {
 	public void setDecorationtime(String decorationtime) {
 		this.decorationtime = decorationtime;
 	}
-	public Double getBrokeragefee() {
+	public Long getBrokeragefee() {
 		return brokeragefee;
 	}
-	public void setBrokeragefee(Double brokeragefee) {
-		this.brokeragefee = brokeragefee;
+	public void setBrokeragefee(long l) {
+		this.brokeragefee = l;
 	}
 	public String getNote() {
 		return note;
@@ -237,6 +237,7 @@ public class BuildingEntity {
 	public void setManagerphonenumber(String managerphonenumber) {
 		this.managerphonenumber = managerphonenumber;
 	}
+
 	
 }
 // làm map 1:1 với db tên làm giống

@@ -22,22 +22,18 @@ public class BuildingRespositoryImpl implements BuildingRespository{
     public static void joinTable(Map<String, Object> params, ArrayList<String> typecode, StringBuilder sql) {
 		String staffid = params.get("staffid").toString();
 		if(StringUtil.checkString((staffid))) {
-			sql.append(" INNER JOIN assignmentbuilding "
-					+ "ON id = assignmentbuilding.buildingid ");
+			sql.append(" INNER JOIN assignmentbuilding ON b.id = assignmentbuilding.buildingid ");
 		}
 		
 		if(typecode != null && typecode.size() != 0) {
-			sql.append(" INNER JOIN buildingrenttype "
-					+   "ON id = buildingrenttype.buildingid ");
-			sql.append(" INNER JOIN renttype "
-					+   "ON renttype.id = buildingrenttype.renttypeid ");
+			sql.append(" INNER JOIN buildingrenttype ON b.id = buildingrenttype.buildingid ");
+			sql.append(" INNER JOIN renttype ON renttype.id = buildingrenttype.renttypeid ");
 		}
 		
-		String rentareafrom = params.get("areafrom").toString();
-		String rentareato = params.get("areato").toString();
+		String rentareafrom = (String)params.get("areafrom");
+		String rentareato = (String)params.get("areato");
 		if(StringUtil.checkString(rentareafrom) == true || StringUtil.checkString(rentareato) == true) {
-			sql.append(" INNER JOIN rentarea "
-					+  " ON id = rentarea.buildingid");
+			sql.append(" INNER JOIN rentarea ON b.id = rentarea.buildingid ");
 		}
 	}
     
@@ -66,34 +62,38 @@ public class BuildingRespositoryImpl implements BuildingRespository{
 			where.append(" AND assignmentbuiding.staffid = " + StaffId +" ");
 		}
 		
+		
+		//java 7 
 		if(typecode != null && typecode.size() != 0) {
+			ArrayList<String> code = new ArrayList<>();
 			for(String it : typecode) {
-				where.append(" AND renttype.code IN (" + String.join(" , ", typecode) + ") ");
+				code.add("'" + it + "'");
 			}
+			where.append(" AND rentype.code IN (" + String.join(" , ", code) + ") ");
 		}
 		
-		String rentareafrom = params.get("areafrom").toString();
-		String rentareato = params.get("areato").toString();
+		String rentareafrom = (String)params.get("areafrom");
+		String rentareato = (String)params.get("areato");
 		if(StringUtil.checkString(rentareafrom) == true ) {
-			Long from = Long.parseLong(rentareafrom);
-			where.append(" AND rentarea.value >= " + from +" " );
+			//Long from = Long.parseLong(rentareafrom);
+			where.append(" AND rentarea.value >= " + rentareafrom +" " );
 		}
 		
 		if(StringUtil.checkString(rentareato) == true ) {
-			Long to = Long.parseLong(rentareato);
-			where.append(" AND rentarea.value <= " + to +" " );
+			//Long to = Long.parseLong(rentareato);
+			where.append(" AND rentarea.value <= " + rentareato +" " );
 		}		
 		
-		String rentpricefrom = params.get("pricefrom").toString();
-		String rentpriceto = params.get("priceto").toString();
+		String rentpricefrom = (String)params.get("pricefrom");
+		String rentpriceto =  (String)params.get("priceto");
 		if(StringUtil.checkString(rentpricefrom) == true ) {
-			Long rfrom = Long.parseLong(rentpricefrom);
-			where.append(" AND rentprice >= " + rfrom +" " );
+			//Long rfrom = Long.parseLong(rentpricefrom);
+			where.append(" AND rentprice >= " + rentpricefrom +" " );
 		}
 		
 		if(StringUtil.checkString(rentpriceto) == true ) {
-			Long rto = Long.parseLong(rentpriceto);
-			where.append(" AND rentprice <= " + rto +" " );
+			//Long rto = Long.parseLong(rentpriceto);
+			where.append(" AND rentprice <= " + rentpriceto +" " );
 		}		
 		
 	}
@@ -101,15 +101,14 @@ public class BuildingRespositoryImpl implements BuildingRespository{
 	@Override
 
 	public ArrayList<BuildingEntity> findAll(Map<String, Object> params, ArrayList<String> typecode) {
-		StringBuilder sql = new StringBuilder("SELECT id, name, districtid, street, districtid, numberofbasement, floorarea, rentprice, managername, managerphonenumber, "
-				+ "servicefee,brokeragefee FROM building ");
-		
-		StringBuilder where = new StringBuilder(" WHERE 1 = 1 ");
-		
+		StringBuilder sql = new StringBuilder("SELECT b.id, b.name, b.districtid, b.street, b.districtid, b.numberofbasement, b.floorarea, b.rentprice, b.managername, b.managerphonenumber, "
+				+ "b.servicefee,b.brokeragefee FROM building b");
+
 		joinTable(params, typecode, sql);
+		StringBuilder where = new StringBuilder(" WHERE 1 = 1 ");
 		queryNormal(params, where);
 		querySpecial(params, typecode, where);
-		where.append(" GROUP BY id;");
+		where.append(" GROUP BY b.id;");
 		sql.append(where);
 		ArrayList<BuildingEntity> arr = new ArrayList<>();
 		
@@ -118,16 +117,18 @@ public class BuildingRespositoryImpl implements BuildingRespository{
 			ResultSet rs = stmt.executeQuery(sql.toString());){
 			while(rs.next()) {
 				BuildingEntity y = new BuildingEntity();
-				y.setName(rs.getString("name"));
-				y.setFloorarea(rs.getInt("floorarea"));
-				y.setWard(rs.getString("ward"));
-				y.setStreet(rs.getString("street"));
-				y.setNumberofbasement(rs.getInt("numberofbasement"));
-				y.setDirection(rs.getString("direction"));
-				y.setLevel(rs.getString("level"));
-				y.setRentprice(rs.getInt("rentprice"));
-				y.setManagername(rs.getString("managername"));
-				y.setManagerphonenumber(rs.getString("managerphonenumber"));
+				y.setId(rs.getLong("b.id"));
+				y.setName(rs.getString("b.name"));
+				y.setWard(rs.getString("b.ward"));
+				y.setDistrictid(rs.getLong("b.districtid"));
+				y.setStreet(rs.getString("b.street"));
+				y.setFloorarea(rs.getInt("b.floorarea"));
+				y.setRentprice(rs.getInt("b.rentprice"));
+				y.setServicefee(rs.getString("b.servicefee"));
+				y.setBrokeragefee(rs.getLong("b.brokeragefee"));
+				y.setManagername(rs.getString("b.managername"));
+				y.setManagerphonenumber(rs.getString("b.managerphonenumber"));
+				
 				arr.add(y);
 			}
 		}
