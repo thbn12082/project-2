@@ -3,29 +3,29 @@ package com.thebinh.repository.entity;
 import java.sql.Date;
 
 public class AssignmentBuildingEntity {
-	private int id;
-	private int staffid;
-	private int buildingid;
+	private Long id;
+	private Long staffid;
+	private Long buildingid;
 	private Date createddate;
 	private Date modifieddate;
 	private String createdby;
 	private String modifiedby;
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
-	public int getStaffid() {
+	public Long getStaffid() {
 		return staffid;
 	}
-	public void setStaffid(int staffid) {
+	public void setStaffid(Long staffid) {
 		this.staffid = staffid;
 	}
-	public int getBuildingid() {
+	public Long getBuildingid() {
 		return buildingid;
 	}
-	public void setBuildingid(int buildingid) {
+	public void setBuildingid(Long buildingid) {
 		this.buildingid = buildingid;
 	}
 	public Date getCreateddate() {

@@ -33,11 +33,11 @@ public class BuildingServiceImpl implements BuildingService{
 			BuildingDTO building = new BuildingDTO();
 			building.setName(item.getName());
 			DistrictEntity districtEntity = districtRepository.findNameById(item.getDistrictid());
-			building.setAddress(item.getStreet() +" " + item.getWard() +" ");
+			building.setAddress(item.getStreet() +" " + item.getWard() +" "+ districtEntity.getName());
 			building.setNumberOfBasement(item.getNumberofbasement());
 			result.add(building);
 		}
 		return result;
 	}
 }
-//+ districtEntity.getName()
+//

@@ -5,13 +5,13 @@ import java.sql.Date;
 // phải là java bean
 
 public class BuildingEntity {
-	private long id; // id
+	private Long id; // id
 	private String name; // tên
 	private String street; // đường
 	private String ward; // phường
 	private Long districtid; // id huyện
 	private String structure; // cấu trúc
-	private int numberofbasement; // số tầng hầm
+	private Long numberofbasement; // số tầng hầm
 	private int floorarea; // diện tích sàn
 	private String direction; // hướng 
 	private String level; // hạng
@@ -42,7 +42,7 @@ public class BuildingEntity {
 	public long getId() {
 		return id;
 	}
-	public void setId(long l) {
+	public void setId(Long l) {
 		this.id = l;
 	}
 	public String getName() {
@@ -75,10 +75,10 @@ public class BuildingEntity {
 	public void setStructure(String structure) {
 		this.structure = structure;
 	}
-	public int getNumberofbasement() {
+	public Long getNumberofbasement() {
 		return numberofbasement;
 	}
-	public void setNumberofbasement(int numberofbasement) {
+	public void setNumberofbasement(Long numberofbasement) {
 		this.numberofbasement = numberofbasement;
 	}
 	public int getFloorarea() {

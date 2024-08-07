@@ -2,7 +2,7 @@ package com.thebinh.model;
 
 public class BuildingDTO {
 	private String name;
-	private Integer numberOfBasement;
+	private Long numberOfBasement;
 	private String address;
 	
 	public String getName() {
@@ -11,10 +11,10 @@ public class BuildingDTO {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Integer getNumberOfBasement() {
+	public Long getNumberOfBasement() {
 		return numberOfBasement;
 	}
-	public void setNumberOfBasement(Integer numberOfBasement) {
+	public void setNumberOfBasement(Long numberOfBasement) {
 		this.numberOfBasement = numberOfBasement;
 	}
 	public String getAddress() {
