@@ -11,14 +11,12 @@ import java.util.Map;
 import org.springframework.stereotype.Repository;
 import com.thebinh.repository.BuildingRespository;
 import com.thebinh.repository.entity.BuildingEntity;
+import com.thebinh.utils.ConnectionJDBCUtil;
 import com.thebinh.utils.NumberUtil;
 import com.thebinh.utils.StringUtil;
 @Repository
 public class BuildingRespositoryImpl implements BuildingRespository{
-	private static String url = "jdbc:mysql://localhost:3306/estatebasic?autoRecconect=true&useSSL=false";
-    static final String username = "root";
-    static final String password = "0281";
-    
+
     public static void joinTable(Map<String, Object> params, ArrayList<String> typecode, StringBuilder sql) {
 		String staffid = (String)params.get("staffid");
 		if(StringUtil.checkString((staffid))) {
@@ -109,7 +107,7 @@ public class BuildingRespositoryImpl implements BuildingRespository{
 		where.append(" GROUP BY b.id;");
 		sql.append(where);
 		ArrayList<BuildingEntity> arr = new ArrayList<>();		
-		try(Connection conn = DriverManager.getConnection(url, username, password);
+		try(Connection conn = ConnectionJDBCUtil.getConnect();
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery(sql.toString());){
 			while(rs.next()) {

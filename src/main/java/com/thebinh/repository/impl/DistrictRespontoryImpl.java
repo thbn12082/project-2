@@ -13,15 +13,10 @@ import org.springframework.stereotype.Repository;
 import com.thebinh.repository.BuildingRespository;
 import com.thebinh.repository.DistrictRespontory;
 import com.thebinh.repository.entity.DistrictEntity;
+import com.thebinh.utils.ConnectionJDBCUtil;
 
 @Repository
 public class DistrictRespontoryImpl implements DistrictRespontory{
-	
-	private static String url = "jdbc:mysql://localhost:3306/estatebasic?autoRecconect=true&useSSL=false";
-	final static String username = "root";
-	final static String password = "0281";
-	
-	
 	@Autowired
 	private BuildingRespository building;
 	
@@ -30,7 +25,7 @@ public class DistrictRespontoryImpl implements DistrictRespontory{
 	public DistrictEntity findNameById(Long id)  {
 		String sql ="SELECT name FROM district WHERE id = " + id +";";
 		DistrictEntity district = new DistrictEntity();
-		try(Connection conn = DriverManager.getConnection(url, username, password);
+		try(Connection conn = ConnectionJDBCUtil.getConnect();
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery(sql)){
 			
