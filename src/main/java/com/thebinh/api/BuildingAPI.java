@@ -23,7 +23,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.thebinh.customexeptions.FieldRequiredException;
 import com.thebinh.model.BuildingDTO;
-import com.thebinh.model.ErrorResponseDTO;
 import com.thebinh.service.BuildingService;
 
 @RestController
@@ -31,9 +30,9 @@ public class BuildingAPI {
 	@Autowired
     private BuildingService buildingService;
 	@GetMapping(value="/api/building/")
-	public ArrayList<BuildingDTO> getBuilding(@RequestParam(value = "name", required = false) String name,
-											  @RequestParam (value = "districid", required = false) Long districtId){
-		ArrayList<BuildingDTO> result = buildingService.findAll(name, districtId);
+	public ArrayList<BuildingDTO> getBuilding(@RequestParam Map<String,  Object> params,
+			           						  @RequestParam (value = "typecode", required = false) ArrayList<String> typecode){
+		ArrayList<BuildingDTO> result = buildingService.findAll(params, typecode);
 		return result;
 	}
 }
