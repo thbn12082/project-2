@@ -29,6 +29,7 @@ public class BuildingSearchBuilderConvertor {
 																						 .setStaffId(MapUtil.getObject(params, "staffid",Long.class))
 																						 .setTypeCode(typecode)
 																						 .build();
+		/// nguyễn thế bình
 		return buildingSearchBuilder;
 	}
 }
