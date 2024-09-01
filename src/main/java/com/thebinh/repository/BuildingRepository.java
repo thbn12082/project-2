@@ -1,9 +1,12 @@
 package com.thebinh.repository;
 
-import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
+import com.thebinh.builder.BuildingSearchBuilder;
 import com.thebinh.repository.entity.BuildingEntity;
 
 public interface BuildingRepository {
-	ArrayList<BuildingEntity> findAll(String name, Long districtId);
+	List<BuildingEntity> findAll(BuildingSearchBuilder buildingSearchBuilder);
+
 }
