@@ -4,6 +4,6 @@ import java.util.ArrayList;
 
 import com.thebinh.repository.entity.DistrictEntity;
 
-public interface DistrictRespontory {
+public interface DistrictRepontory {
 	DistrictEntity findNameById(Long districtId);
 }

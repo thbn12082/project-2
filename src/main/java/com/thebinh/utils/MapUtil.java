@@ -3,10 +3,7 @@ package com.thebinh.utils;
 import java.util.Map;
 
 public class MapUtil {
-	public static <T> T getObject(Map<String, Object> params, String key, Class<T> tClass) {
-		
-		// <T> là đại diện cho 1 class
-		// T là đại diện cho 1 Object
+	public static <T>  T getObject(Map<String, Object> params, String key, Class<T> tClass) {
 		
 		Object obj = params.getOrDefault(key, null);
 		if(obj != null) {

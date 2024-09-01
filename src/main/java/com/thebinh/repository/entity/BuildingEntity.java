@@ -1,44 +1,127 @@
 package com.thebinh.repository.entity;
 
+//import java.awt.List;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
-// phải là java bean
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+
+@Entity
+@Table(name= "building")
 
 public class BuildingEntity {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id; // id
+	@Column(name = "name")
 	private String name; // tên
+	@Column(name = "street")
 	private String street; // đường
+	@Column(name = "ward")
 	private String ward; // phường
+	/*@Column(name = "districtid")
 	private Long districtid; // id huyện
+*/	@Column(name = "structure")
 	private String structure; // cấu trúc
+	@Column(name = "numberofbasement")
 	private Long numberofbasement; // số tầng hầm
-	private int floorarea; // diện tích sàn
-	private String direction; // hướng 
+	@Column(name = "floorarea")
+	private Long floorarea; // diện tích sàn
+	@Column(name = "direction")
+	private String direction; // hướng
+	@Column(name = "level")
 	private String level; // hạng
-	private int rentprice; // giá thuê
+	@Column(name = "rentprice")
+	private Long rentprice; // giá thuê
+	@Column(name = "rentpricedescription")
 	private String rentpricedescription; // chú thích giá thuê 
+	@Column(name = "servicefee")
 	private String servicefee; // phí dịch vụ
+	@Column(name = "carfee")
 	private String carfee; // phí xe hơi
-	private String motorbikefee; // phí xe máy 
+	@Column(name = "motorbikefee")
+	private String motorbikefee; // phí xe máy
+	@Column(name = "overtimefee")
 	private String overtimefee; // phí làm thêm giờ
+	@Column(name = "waterfee")
 	private String waterfee; // tiền nước
+	@Column(name = "electricityfee")
 	private String electricityfee; // tiền điện
+	@Column(name = "deposit")
 	private String deposit; // tiền đặt cọc
+	@Column(name = "payment")
 	private String payment; // thanh toán
+	@Column(name = "renttime")
 	private String renttime; // thời gian thuê
+	@Column(name = "decorationtime")
 	private String decorationtime; // thời gian decor
+	@Column(name = "brokeragefee")
 	private Long brokeragefee; // phí môi giới
+	@Column(name = "note")
 	private String note; // chú thích
+	@Column(name = "linkofbuilding")
 	private String linkofbuilding; // liên kết tòa nhà
+	@Column(name = "map")
 	private String map; // bản đồ
+	@Column(name = "image")
 	private String image; // hình ảnh
+	@Column(name = "createddate")
 	private Date createddate; // ngày tạo
+	@Column(name = "modifieddate")
 	private Date modifieddate; // ngày chỉnh sửa
+	@Column(name = "createdby")
 	private String createdby; // tạo bởi
+	@Column(name = "modifiedby")
 	private String modifiedby; // chỉnh sửa bởi
+	@Column(name = "managername")
 	private String managername; // tên quản lý
+	@Column(name = "managerphonenumber")
 	private String managerphonenumber; // số điện thoại quản lý
 	
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "districtid")
+	private DistrictEntity district;
+	
+	
+	
+	
+	@OneToMany(mappedBy = "building", fetch = FetchType.LAZY)
+	private List<RentAreaEntity> items = new ArrayList<>();
+	
+	
+	
+	
+	
+	
+	
+	public DistrictEntity getDistrict() {
+		return district;
+	}
+	public void setDistrict(DistrictEntity district) {
+		this.district = district;
+	}
+	
+	public List<RentAreaEntity> getItems() {
+		return items;
+	}
+	public void setItems(List<RentAreaEntity> items) {
+		this.items = items;
+	}
+	public void setBrokeragefee(Long brokeragefee) {
+		this.brokeragefee = brokeragefee;
+	}
 	public long getId() {
 		return id;
 	}
@@ -63,12 +146,12 @@ public class BuildingEntity {
 	public void setWard(String ward) {
 		this.ward = ward;
 	}
-	public Long getDistrictid() {
+	/*public Long getDistrictid() {
 		return districtid;
 	}
 	public void setDistrictid(Long districtid) {
 		this.districtid = districtid;
-	}
+	}*/
 	public String getStructure() {
 		return structure;
 	}
@@ -81,11 +164,11 @@ public class BuildingEntity {
 	public void setNumberofbasement(Long numberofbasement) {
 		this.numberofbasement = numberofbasement;
 	}
-	public int getFloorarea() {
+	public Long getFloorarea() {
 		return floorarea;
 	}
-	public void setFloorarea(int floorarea) {
-		this.floorarea = floorarea;
+	public void setFloorarea(Long long1) {
+		this.floorarea = (long) long1;
 	}
 	public String getDirection() {
 		return direction;
@@ -99,11 +182,11 @@ public class BuildingEntity {
 	public void setLevel(String level) {
 		this.level = level;
 	}
-	public int getRentprice() {
+	public Long getRentprice() {
 		return rentprice;
 	}
-	public void setRentprice(int rentprice) {
-		this.rentprice = rentprice;
+	public void setRentprice(Long long1) {
+		this.rentprice = (long) long1;
 	}
 	public String getRentpricedescription() {
 		return rentpricedescription;

@@ -10,15 +10,15 @@ import java.sql.Statement;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Repository;
-import com.thebinh.repository.BuildingRespository;
-import com.thebinh.repository.DistrictRespontory;
+import com.thebinh.repository.BuildingRepository;
+import com.thebinh.repository.DistrictRepontory;
 import com.thebinh.repository.entity.DistrictEntity;
 import com.thebinh.utils.ConnectionJDBCUtil;
 
 @Repository
-public class DistrictRespontoryImpl implements DistrictRespontory{
+public class DistrictRespontoryImpl implements DistrictRepontory{
 	@Autowired
-	private BuildingRespository building;
+	private BuildingRepository building;
 	
 	@Override
 

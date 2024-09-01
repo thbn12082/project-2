@@ -4,10 +4,21 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
+
+
+@PropertySource("classpath:application-uat.properties")
 public class ConnectionJDBCUtil {
-	    static final String url = "jdbc:mysql://localhost:3306/estatebasic?autoRecconect=true&useSSL=false";
-		static final String username = "root";
-		static final String password = "0281";
+	@Value("${spring.datasource.url}")
+	    static String url;
+	
+	
+	@Value("${spring.datasource.username}")
+		static String username;
+	
+	@Value("${spring.datasource.password}")
+		static String password ;
 		
 		
 		

@@ -131,6 +131,11 @@ public class BuildingSearchBuilder {
 		private Long staffId;
 		
 		
+	/*	public Long getAreaFrom() {
+			return areaFrom;
+		}*/
+
+
 		// lớp con tập trung xây dựng các phương thức set
 		// đây là các constructor
 		public Builder setName(String name) {
@@ -139,6 +144,13 @@ public class BuildingSearchBuilder {
 			//this chính là những field của Builder
 		}
 		
+		
+		/*public Long getAreaFrom() {
+			return areaFrom;
+		}*/
+
+
+		// đây là các constructer
 		public Builder setFloorArea(Long floorArea) {
 			this.floorArea = floorArea;
 			return this;
@@ -192,6 +204,7 @@ public class BuildingSearchBuilder {
 		public Builder setAreaFrom(Long areaFrom) {
 			this.areaFrom = areaFrom;
 			return this;
+			// lúc này, this chính là Builder
 		}
 		
 		public Builder setAreaTo(Long areaTo) {

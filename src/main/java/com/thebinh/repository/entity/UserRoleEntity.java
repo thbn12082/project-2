@@ -1,7 +1,6 @@
-package com.thebinh.repository.entity;
+/*package com.thebinh.repository.entity;
 
 import java.sql.Date;
-import java.util.ArrayList;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,18 +13,21 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "rentarea")
-public class RentAreaEntity {
+@Table (name = "user_role")
+public class UserRoleEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@Column(name = "value")
-	private String value;
-	/*@Column(name = "buildingid")
-	private Long buildingid;*/
+	@Column(name = "roleid", nullable = false)
+	private Long roleid;
+	@Column(name = "userid", nullable = false)
+	private Long userid;
+	// Tại sao lại phải cmt đoạn này?? vì jpa sẽ tự động tạo và liên kết với 2 bảng userentity và roleentity
+	
+	
 	@Column(name = "createddate")
 	private Date createddate;
-	@Column (name = "modifieddate")
+	@Column(name = "modifieddate")
 	private Date modifieddate;
 	@Column(name = "createdby")
 	private String createdby;
@@ -35,41 +37,41 @@ public class RentAreaEntity {
 	
 	
 	
+	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "buildingid")
-	private BuildingEntity building;
+	@JoinColumn(name = "userid")
+	private UserEntity user;
+	
+	
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "roleid")
+	private RoleEntity role;
 	
 	
 	
 	
-	public BuildingEntity getBuilding() {
-		return building;
-	}
-	public void setBuilding(BuildingEntity building) {
-		this.building = building;
-	}
 	
-	public void setCreatedby(String createdby) {
-		this.createdby = createdby;
-	}
+	
+	
 	public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getValue() {
-		return value;
+	public Long getRoleid() {
+		return roleid;
 	}
-	public void setValue(String value) {
-		this.value = value;
+	public void setRoleid(Long roleid) {
+		this.roleid = roleid;
 	}
-	/*public Long getBuildingid() {
-		return buildingid;
+	public Long getUserid() {
+		return userid;
 	}
-	public void setBuildingid(Long buildingid) {
-		this.buildingid = buildingid;
-	}*/
+	public void setUserid(Long userid) {
+		this.userid = userid;
+	}
 	public Date getCreateddate() {
 		return createddate;
 	}
@@ -85,7 +87,7 @@ public class RentAreaEntity {
 	public String getCreatedby() {
 		return createdby;
 	}
-	public void setCreateedby(String createdby) {
+	public void setCreatedby(String createdby) {
 		this.createdby = createdby;
 	}
 	public String getModifiedby() {
@@ -94,8 +96,8 @@ public class RentAreaEntity {
 	public void setModifiedby(String modifiedby) {
 		this.modifiedby = modifiedby;
 	}
-	
-	
-	
-	
 }
+*/
+
+
+// khi hocj many to many, bỏ hết luôn userroleentity
